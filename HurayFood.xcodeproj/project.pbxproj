@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		87D5FFDA2D5F257B00BCDEF4 /* det_fp16.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 87D5FFD92D5F257B00BCDEF4 /* det_fp16.mlpackage */; };
+		87D5FFDE2D5F27D500BCDEF4 /* cls_fp32.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 87D5FFDD2D5F27D500BCDEF4 /* cls_fp32.mlpackage */; };
+		87D5FFE12D5F3D3A00BCDEF4 /* cls.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 87D5FFDF2D5F3D3A00BCDEF4 /* cls.mlpackage */; };
+		87D5FFE22D5F3D3A00BCDEF4 /* det.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 87D5FFE02D5F3D3A00BCDEF4 /* det.mlpackage */; };
+		87EF0EC72D59B84E001D1A40 /* ImageProcessingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF0EC62D59B84E001D1A40 /* ImageProcessingViewModel.swift */; };
+		87EF0EC92D59B95B001D1A40 /* CoreMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF0EC82D59B95B001D1A40 /* CoreMLManager.swift */; };
+		87F8C78A2D520CC8009728BB /* HurayFoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8C7892D520CC8009728BB /* HurayFoodApp.swift */; };
+		87F8C78C2D520CC8009728BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8C78B2D520CC8009728BB /* ContentView.swift */; };
+		87F8C78E2D520CC8009728BB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8C78D2D520CC8009728BB /* Item.swift */; };
+		87F8C7902D520CCA009728BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87F8C78F2D520CCA009728BB /* Assets.xcassets */; };
+		87F8C7932D520CCA009728BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87F8C7922D520CCA009728BB /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		87D5FFD92D5F257B00BCDEF4 /* det_fp16.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = det_fp16.mlpackage; path = ../../../codes/250203/det_fp16.mlpackage; sourceTree = "<group>"; };
+		87D5FFDD2D5F27D500BCDEF4 /* cls_fp32.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = cls_fp32.mlpackage; path = ../../../codes/250203/cls_fp32.mlpackage; sourceTree = "<group>"; };
+		87D5FFDF2D5F3D3A00BCDEF4 /* cls.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = cls.mlpackage; path = ../../../codes/250203/cls.mlpackage; sourceTree = "<group>"; };
+		87D5FFE02D5F3D3A00BCDEF4 /* det.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = det.mlpackage; sourceTree = "<group>"; };
+		87EF0EC62D59B84E001D1A40 /* ImageProcessingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingViewModel.swift; sourceTree = "<group>"; };
+		87EF0EC82D59B95B001D1A40 /* CoreMLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLManager.swift; sourceTree = "<group>"; };
+		87F8C7862D520CC8009728BB /* HurayFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HurayFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87F8C7892D520CC8009728BB /* HurayFoodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurayFoodApp.swift; sourceTree = "<group>"; };
+		87F8C78B2D520CC8009728BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		87F8C78D2D520CC8009728BB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		87F8C78F2D520CCA009728BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87F8C7922D520CCA009728BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		87F8C7832D520CC8009728BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		87EF0EB82D59B74C001D1A40 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87D5FFDD2D5F27D500BCDEF4 /* cls_fp32.mlpackage */,
+				87D5FFDF2D5F3D3A00BCDEF4 /* cls.mlpackage */,
+				87D5FFE02D5F3D3A00BCDEF4 /* det.mlpackage */,
+				87D5FFD92D5F257B00BCDEF4 /* det_fp16.mlpackage */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		87EF0EBD2D59B7CA001D1A40 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				87EF0EC82D59B95B001D1A40 /* CoreMLManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		87EF0EC42D59B832001D1A40 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				87EF0EC62D59B84E001D1A40 /* ImageProcessingViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		87F8C77D2D520CC8009728BB = {
+			isa = PBXGroup;
+			children = (
+				87F8C7882D520CC8009728BB /* HurayFood */,
+				87F8C7872D520CC8009728BB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		87F8C7872D520CC8009728BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87F8C7862D520CC8009728BB /* HurayFood.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87F8C7882D520CC8009728BB /* HurayFood */ = {
+			isa = PBXGroup;
+			children = (
+				87EF0EC42D59B832001D1A40 /* ViewModels */,
+				87EF0EBD2D59B7CA001D1A40 /* Utils */,
+				87EF0EB82D59B74C001D1A40 /* Models */,
+				87F8C7892D520CC8009728BB /* HurayFoodApp.swift */,
+				87F8C78B2D520CC8009728BB /* ContentView.swift */,
+				87F8C78D2D520CC8009728BB /* Item.swift */,
+				87F8C78F2D520CCA009728BB /* Assets.xcassets */,
+				87F8C7912D520CCA009728BB /* Preview Content */,
+			);
+			path = HurayFood;
+			sourceTree = "<group>";
+		};
+		87F8C7912D520CCA009728BB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				87F8C7922D520CCA009728BB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		87F8C7852D520CC8009728BB /* HurayFood */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87F8C7962D520CCA009728BB /* Build configuration list for PBXNativeTarget "HurayFood" */;
+			buildPhases = (
+				87F8C7822D520CC8009728BB /* Sources */,
+				87F8C7832D520CC8009728BB /* Frameworks */,
+				87F8C7842D520CC8009728BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HurayFood;
+			productName = HurayFood;
+			productReference = 87F8C7862D520CC8009728BB /* HurayFood.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		87F8C77E2D520CC8009728BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					87F8C7852D520CC8009728BB = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 87F8C7812D520CC8009728BB /* Build configuration list for PBXProject "HurayFood" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 87F8C77D2D520CC8009728BB;
+			productRefGroup = 87F8C7872D520CC8009728BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				87F8C7852D520CC8009728BB /* HurayFood */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		87F8C7842D520CC8009728BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87F8C7932D520CCA009728BB /* Preview Assets.xcassets in Resources */,
+				87F8C7902D520CCA009728BB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		87F8C7822D520CC8009728BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87D5FFE22D5F3D3A00BCDEF4 /* det.mlpackage in Sources */,
+				87EF0EC92D59B95B001D1A40 /* CoreMLManager.swift in Sources */,
+				87D5FFDE2D5F27D500BCDEF4 /* cls_fp32.mlpackage in Sources */,
+				87D5FFE12D5F3D3A00BCDEF4 /* cls.mlpackage in Sources */,
+				87F8C78C2D520CC8009728BB /* ContentView.swift in Sources */,
+				87EF0EC72D59B84E001D1A40 /* ImageProcessingViewModel.swift in Sources */,
+				87F8C78E2D520CC8009728BB /* Item.swift in Sources */,
+				87D5FFDA2D5F257B00BCDEF4 /* det_fp16.mlpackage in Sources */,
+				87F8C78A2D520CC8009728BB /* HurayFoodApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		87F8C7942D520CCA009728BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		87F8C7952D520CCA009728BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		87F8C7972D520CCA009728BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HurayFood/Preview Content\"";
+				DEVELOPMENT_TEAM = Q4J7J4CK5K;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huray.HurayFood;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		87F8C7982D520CCA009728BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HurayFood/Preview Content\"";
+				DEVELOPMENT_TEAM = Q4J7J4CK5K;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = huray.HurayFood;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		87F8C7812D520CC8009728BB /* Build configuration list for PBXProject "HurayFood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87F8C7942D520CCA009728BB /* Debug */,
+				87F8C7952D520CCA009728BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87F8C7962D520CCA009728BB /* Build configuration list for PBXNativeTarget "HurayFood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87F8C7972D520CCA009728BB /* Debug */,
+				87F8C7982D520CCA009728BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 87F8C77E2D520CC8009728BB /* Project object */;
+}
