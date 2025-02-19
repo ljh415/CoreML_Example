@@ -60,7 +60,6 @@ class CoreMLManager {
             let numBoxes = confidenceArray.shape[0].intValue
             let confidenceData = confidenceArray.dataPointer.bindMemory(to: Float.self, capacity: numBoxes * 2)
             let coordinatesData = coordinatesArray.dataPointer.bindMemory(to: Float.self, capacity: numBoxes * 4)
-            print(numBoxes)
             
             for i in 0..<numBoxes{
                 print("i: \(i)")
@@ -91,9 +90,6 @@ class CoreMLManager {
                 }
             }
             
-            print(boundingBoxes)
-            print(confidenceScores)
-            
             DispatchQueue.main.async {
                 completion(boundingBoxes, confidenceScores, letterboxRect)
             }
@@ -115,8 +111,6 @@ class CoreMLManager {
             print("이미지 Resize 실패")
             return
         }
-        
-        print("check")
         
         guard let pixelBuffer = convertToPixelBuffer(from: resizedImage) else {
             print("이미지 크롭/CVPixelBuffer 변환 실패")

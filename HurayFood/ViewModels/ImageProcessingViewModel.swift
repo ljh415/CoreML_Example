@@ -46,9 +46,6 @@ class ImageProcessingViewModel: ObservableObject {
                 // bbox 복원 letterbox 후처리
                 let originalSize = CGSize(width: cgImage.width, height: cgImage.height)
                 let targetSize = CGSize(width: 640, height: 640)
-//                let restoredBoxes = boxes.map { box in
-//                    self.restoreBoundingBox(box, from: targetSize, to: originalSize, letterboxRect: letterboxRect)
-//                }
                 
                 self.detectedBoxes = boxes
                 self.confidenceScores = scores
@@ -115,29 +112,9 @@ class ImageProcessingViewModel: ObservableObject {
             }
         }
     }
-    
-//    private func restoreBoundingBox(_ bbox: CGRect, from targetSize: CGSize, to originalSize: CGSize, letterboxRect: CGRect) -> CGRect {
-//        let originalWidth = originalSize.width
-//        let originalHeight = originalSize.height
-//        let targetWidth = targetSize.width
-//        let targetHeight = targetSize.height
-//
-//        let scale = min(targetWidth / originalWidth, targetHeight / originalHeight)
-//
-//        let x = (bbox.origin.x - letterboxRect.origin.x) / scale
-//        let y = (bbox.origin.y - letterboxRect.origin.y) / scale
-//        let width = bbox.width / scale
-//        let height = bbox.height / scale
-//        
-//        let restoredBox = CGRect(x: x, y: y, width: width, height: height)
-//        
-//        return restoredBox
-//    }
 
     private func drawBoundingBoxes(on image: UIImage, boxes: [CGRect], scores: [Float], results: [String: [(String, Double)]]) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: image.size)
-        print("🖼 [drawBoundingBoxes] 이미지 크기: \(image.size)")
-        print("🖼 [drawBoundingBoxes] 그려지는 bbox 좌표: \(boxes)")
         return renderer.image { ctx in
             image.draw(at: .zero)
             
