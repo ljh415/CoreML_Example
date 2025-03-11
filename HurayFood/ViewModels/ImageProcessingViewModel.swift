@@ -123,7 +123,10 @@ class ImageProcessingViewModel: ObservableObject {
             
             for (i, box) in boxes.enumerated() {
                 let adjustedY = image.size.height - box.origin.y - box.height
-                let adjustedBox = CGRect(x: box.origin.x, y: adjustedY, width: box.width, height: box.height)
+                let adjustedBox = CGRect(x: box.origin.x, y: box.origin.y, width: box.width, height: box.height)
+                
+                //debug box
+                print("debug \(adjustedBox)")
                 
                 ctx.cgContext.stroke(adjustedBox)
                 
@@ -144,7 +147,7 @@ class ImageProcessingViewModel: ObservableObject {
                 ]
                 
                 // ✅ 텍스트 위치를 box 위쪽에 배치
-                let textPosition = CGPoint(x: box.origin.x, y: max(adjustedY - 20, 5))
+                let textPosition = CGPoint(x: box.origin.x, y: max(box.origin.y - 20, 5))
                 text.draw(at: textPosition, withAttributes: attributes)
             }
         }

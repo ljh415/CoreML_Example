@@ -21,7 +21,20 @@ class CoreMLManager {
     
     private init() {
         do {
-            self.detectionModel = try det(configuration: MLModelConfiguration())
+            let det_config = MLModelConfiguration()
+            det_config.computeUnits = .all
+            det_config.allowLowPrecisionAccumulationOnGPU = true
+                        
+            
+            let cls_config = MLModelConfiguration()
+            cls_config.computeUnits = .cpuAndGPU
+            cls_config.allowLowPrecisionAccumulationOnGPU = true
+            // unit / low
+            // cpu+gpu / true : 60중반
+            // cpu+NE : 60중후반
+            // all+true : 50언더
+            
+            self.detectionModel = try det(configuration: det_config)
             self.classificationModel = try cls(configuration: MLModelConfiguration())
         } catch {
             fatalError("CoreML 모델 로드 실패: \(error)")
@@ -75,18 +88,20 @@ class CoreMLManager {
                     let originalSize = CGSize(width: cgImage.width, height: cgImage.height)
                     let bbox = restoreBoundingBox(
                         CGRect(
-                            x: CGFloat((cx - width / 2.0) * 640),
-                            y: CGFloat((cy - height / 2.0) * 640),
-                            width: CGFloat(width * 640),
-                            height: CGFloat(height * 640)
+                            x: CGFloat(cx),
+                            y: CGFloat(cy),
+                            width: CGFloat(width),
+                            height: CGFloat(height)
                         ),
                         from: CGSize(width: 640, height: 640),
                         to:originalSize,
                         letterboxRect: letterboxRect
                     )
+                    print("restored bbox: \(bbox)")
                     boundingBoxes.append(bbox)
                     
                     confidenceScores.append(confidence)
+                    print()
                 }
             }
             
@@ -166,12 +181,34 @@ class CoreMLManager {
         let width = bbox.width * scaleX
         let height = bbox.height * scaleY
 
-        // ✅ UIKit 좌표 (Top-Left) → CoreGraphics 좌표 (Bottom-Left)
-        let flippedY = cgHeight - y - height
-
-        let convertedBBox = CGRect(x: x, y: flippedY, width: width, height: height)
+        let convertedBBox = CGRect(x: x, y: y, width: width, height: height)
 
         return cgImage.cropping(to: convertedBBox)
+    }
+    
+    private func convertToPixelBufferNew(from cgImage: CGImage) -> CVPixelBuffer?{
+        let uiImage = UIImage(cgImage: cgImage)
+        
+        let ciImage = CIImage(image: uiImage)
+        let context = CIContext()
+        
+        var pixelBuffer: CVPixelBuffer?
+        
+        let width = cgImage.width
+        let height = cgImage.height
+        
+        CVPixelBufferCreate(
+            kCFAllocatorDefault,
+            width,
+            height,
+            kCVPixelFormatType_32BGRA,
+            nil,
+            &pixelBuffer)
+        
+        guard let buffer = pixelBuffer else { return nil }
+        
+        context.render(ciImage!, to: buffer)
+        return buffer
     }
 
     
@@ -179,12 +216,14 @@ class CoreMLManager {
         let width = cgImage.width
         let height = cgImage.height
         
+        // 픽셀 버퍼 생성
         var pixelBuffer: CVPixelBuffer?
         let attributes: [CFString: Any] = [
-            kCVPixelBufferCGImageCompatibilityKey: true,
-            kCVPixelBufferCGBitmapContextCompatibilityKey: true
+            kCVPixelBufferCGImageCompatibilityKey: true,          // CGImage와 호환되도록 설정
+            kCVPixelBufferCGBitmapContextCompatibilityKey: true   // CGBitmapContext와 호환되도록 설정
         ]
         
+        // 버퍼 생성요청 -> 생성되는 버퍼는 pixelBuffer 변수에 저장
         let status = CVPixelBufferCreate(
             kCFAllocatorDefault,
             width,
@@ -194,28 +233,28 @@ class CoreMLManager {
             &pixelBuffer
         )
         
+        // 픽셀버퍼 생성 확인
         guard status == kCVReturnSuccess, let buffer = pixelBuffer else {
             return nil
         }
         
+        // 메모리 잠금 + 쓰기 가능하도록 설정
         CVPixelBufferLockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: 0))
         defer { CVPixelBufferUnlockBaseAddress(buffer, CVPixelBufferLockFlags(rawValue: 0)) }
         
+        // 이미지를 그릴 수 있는 그래픽 컨텍스트 생성전
         guard let context = CGContext(
             data: CVPixelBufferGetBaseAddress(buffer),
             width: width,
             height: height,
             bitsPerComponent: 8,
-            bytesPerRow: CVPixelBufferGetBytesPerRow(buffer),
+            bytesPerRow: CVPixelBufferGetBytesPerRow(buffer),  // 한 줄당 바이트 크기 자동 설정
             space: CGColorSpaceCreateDeviceRGB(),
-            bitmapInfo: CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.noneSkipFirst.rawValue
+            bitmapInfo: CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
         ) else {
             print("CGContext 생성 실패")
             return nil
         }
-        
-        context.translateBy(x: 0, y: CGFloat(height))
-        context.scaleBy(x: 1.0, y: -1.0)
         
         context.draw(cgImage, in: CGRect(x:0, y: 0, width: width, height: height))
         
@@ -223,6 +262,7 @@ class CoreMLManager {
     }
     
     func letterboxResize(_ image: CGImage, targetSize: CGSize) -> (CGImage?, CGRect) {
+        // 원본 및 목표 크기 가져오기
         let originalWidth = CGFloat(image.width)
         let originalHeight = CGFloat(image.height)
         let targetWidth = targetSize.width
@@ -238,6 +278,7 @@ class CoreMLManager {
         let dy = (targetHeight - newHeight) / 2.0
         
         // CoreGraphics로 새로운 이미지 생성
+        // 비어있는 이미지 생성 후에
         guard let context = CGContext(
             data: nil,
             width: Int(targetWidth),
@@ -250,7 +291,7 @@ class CoreMLManager {
             return (nil, .zero)
         }
         
-        context.setFillColor(CGColor(gray: 0, alpha:1.0))  // YOLO는 기본적으로 검은색 패딩
+        context.setFillColor(CGColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0))
         context.fill(CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight))
         
         // 원본 비율 유지하며 중앙 배치
@@ -263,19 +304,25 @@ class CoreMLManager {
     }
     
     private func restoreBoundingBox(_ bbox: CGRect, from targetSize: CGSize, to originalSize: CGSize, letterboxRect: CGRect) -> CGRect {
+        
         let originalWidth = originalSize.width
         let originalHeight = originalSize.height
         let targetWidth = targetSize.width
         let targetHeight = targetSize.height
+        
+        let x_out = (bbox.origin.x - bbox.width / 2.0) * targetWidth
+        let y_out = (bbox.origin.y - bbox.height / 2.0) * targetHeight
+        let width_out = bbox.width * targetWidth
+        let height_out = bbox.height * targetHeight
 
         // Letterbox 처리된 이미지의 scale 계산
         let scale = min(targetWidth / originalWidth, targetHeight / originalHeight)
 
         // Letterbox padding을 고려한 보정
-        let x_min = (bbox.origin.x - letterboxRect.origin.x) / scale
-        let y_min = (bbox.origin.y - letterboxRect.origin.y) / scale
-        let width = bbox.width / scale
-        let height = bbox.height / scale
+        let x_min = (x_out - letterboxRect.origin.x) / scale
+        let y_min = (y_out - letterboxRect.origin.y) / scale
+        let width = width_out / scale
+        let height = height_out / scale
 
         // 원본 이미지 크기 범위 내에서 제한
         let restoredBox = CGRect(
