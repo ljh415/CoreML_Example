@@ -7,6 +7,7 @@
 
 import Foundation
 
+import Accelerate
 import CoreML
 import Vision
 import SwiftUI
@@ -29,10 +30,6 @@ class CoreMLManager {
             let cls_config = MLModelConfiguration()
             cls_config.computeUnits = .cpuAndGPU
             cls_config.allowLowPrecisionAccumulationOnGPU = true
-            // unit / low
-            // cpu+gpu / true : 60중반
-            // cpu+NE : 60중후반
-            // all+true : 50언더
             
             self.detectionModel = try det(configuration: det_config)
             self.classificationModel = try cls(configuration: MLModelConfiguration())
@@ -185,31 +182,6 @@ class CoreMLManager {
 
         return cgImage.cropping(to: convertedBBox)
     }
-    
-    private func convertToPixelBufferNew(from cgImage: CGImage) -> CVPixelBuffer?{
-        let uiImage = UIImage(cgImage: cgImage)
-        
-        let ciImage = CIImage(image: uiImage)
-        let context = CIContext()
-        
-        var pixelBuffer: CVPixelBuffer?
-        
-        let width = cgImage.width
-        let height = cgImage.height
-        
-        CVPixelBufferCreate(
-            kCFAllocatorDefault,
-            width,
-            height,
-            kCVPixelFormatType_32BGRA,
-            nil,
-            &pixelBuffer)
-        
-        guard let buffer = pixelBuffer else { return nil }
-        
-        context.render(ciImage!, to: buffer)
-        return buffer
-    }
 
     
     private func convertToPixelBuffer(from cgImage: CGImage) -> CVPixelBuffer? {
@@ -257,6 +229,35 @@ class CoreMLManager {
         }
         
         context.draw(cgImage, in: CGRect(x:0, y: 0, width: width, height: height))
+        
+        // ✅ Accelerate를 활용한 벡터 연산 적용
+        guard let baseAddress = CVPixelBufferGetBaseAddress(buffer)?.assumingMemoryBound(to: UInt8.self) else {
+            print("메모리 접근 실패")
+            return nil
+        }
+
+        let totalPixels = width * height * 4  // BGRA (4채널)
+        
+        // ✅ 입력 및 출력 배열 생성
+        var inputPixels = [Float](repeating: 0, count: totalPixels)
+        var outputPixels = [Float](repeating: 0, count: totalPixels)
+
+        // UInt8 → Float 변환 (0~255 → 0~1)
+        vDSP_vfltu8(baseAddress, 1, &inputPixels, 1, vDSP_Length(totalPixels))
+
+        // ✅ 벡터 연산으로 -1~1 정규화
+        var scale: Float = 2.0 / 255.0
+        var bias: Float = -1.0
+        vDSP_vsmsa(inputPixels, 1, &scale, &bias, &outputPixels, 1, vDSP_Length(totalPixels))
+
+        // -1~1 → 0~255 변환
+        var inverseScale: Float = 127.5
+        var inverseBias: Float = 127.5
+        vDSP_vsmsa(outputPixels, 1, &inverseScale, &inverseBias, &inputPixels, 1, vDSP_Length(totalPixels))
+
+        // Float → UInt8 변환
+        vDSP_vfixu8(inputPixels, 1, baseAddress, 1, vDSP_Length(totalPixels))
+
         
         return buffer
     }
